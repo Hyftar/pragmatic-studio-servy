@@ -1,0 +1,4 @@
+<h1>Show Bear</h1>
+<p>
+  Is <%= bear.name %> hibernating? <strong><%= if bear.hibernating, do: 'yes', else: 'no' %></strong>
+</p>
