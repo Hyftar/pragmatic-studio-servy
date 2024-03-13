@@ -14,7 +14,7 @@ defmodule Servy.Handler do
     |> parse
     |> rewrite_path
     |> route
-    |> log
+    # |> log
     # |> track
     # |> emojify
     |> Conv.format_response

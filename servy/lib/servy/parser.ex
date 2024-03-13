@@ -27,6 +27,7 @@ defmodule Servy.Parser do
 
   def parse_headers([head | tail], headers) do
     [key, value] = head |> String.split(": ")
+
     tail
     |> parse_headers(Map.put(headers, key, value))
   end
