@@ -1,5 +1,5 @@
 <h1>Show Bear</h1>
-<h2><%= bear.name %></h2
+<h2><%= bear.name %></h2>
 <p>
   Is <%= bear.name %> hibernating? <strong><%= if bear.hibernating, do: 'yes', else: 'no' %></strong>
 </p>
