@@ -4,6 +4,7 @@ defmodule Servy.Conv do
   defstruct path: "",
             method: "",
             resp_body: "",
+            resp_content_type: "text/html",
             status: nil,
             headers: %{},
             params: %{}
@@ -11,7 +12,7 @@ defmodule Servy.Conv do
   def format_response(%Conv{} = conv) do
     """
     HTTP/1.1 #{conv |> full_status}
-    Content-Type: text/html
+    Content-Type: #{conv.resp_content_type}
     Content-Length: #{conv.resp_body |> byte_size}
 
     #{conv.resp_body}
