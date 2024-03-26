@@ -23,6 +23,10 @@ defmodule Servy.PledgeServer do
       { caller, :recent_pledges } ->
         send(caller, {:ok, pledges: state})
         listen_loop(state)
+
+      unexpected ->
+        IO.puts("Unexpected message: #{inspect unexpected}")
+        listen_loop(state)
     end
   end
 
@@ -38,7 +42,6 @@ defmodule Servy.PledgeServer do
     receive do
       {:ok, pledges: pledges} -> pledges
     end
-
   end
 
   defp send_pledge_to_service(_name, _amount) do
