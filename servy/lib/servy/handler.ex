@@ -75,6 +75,8 @@ defmodule Servy.Handler do
   end
 
   def route(%Conv{ method: method, path: path } = conv) do
+    Servy.FourOhFourCounter.bump(path)
+
     %Conv{ conv | status: 404, resp_body: "No #{path} path with method #{method} found!"}
   end
 
