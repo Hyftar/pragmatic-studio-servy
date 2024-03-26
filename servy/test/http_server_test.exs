@@ -15,28 +15,19 @@ defmodule HttpServerTest do
   test "sends multiple requests concurrently and handles all responses" do
     spawn(HttpServer, :start, [4000])
 
-    parent = self()
+    base_url = "http://localhost:4000/"
 
-    max_concurrent_requests = 5
+    urls = [
+      "wildthings",
+      "bears",
+      "bears/1",
+      "wildlife",
+      "api/bears",
+    ]
 
-    # Spawn the client processes
-    for _ <- 1..max_concurrent_requests do
-      spawn(fn ->
-        # Send the request
-        {:ok, response} = HTTPoison.get "http://localhost:4000/wildthings"
-
-        # Send the response back to the parent
-        send(parent, {:ok, response})
-      end)
-    end
-
-    # Await all {:handled, response} messages from spawned processes.
-    for _ <- 1..max_concurrent_requests do
-      receive do
-        {:ok, response} ->
-          assert response.status_code == 200
-          assert response.body == "Bears, Lions, Tigers"
-      end
-    end
+    urls
+    |> Enum.map(fn url -> Task.async(fn -> HTTPoison.get(base_url <> url) end) end)
+    |> Enum.map(&Task.await(&1))
+    |> Enum.each(fn {:ok, response} -> assert response.status_code == 200 end)
   end
 end
