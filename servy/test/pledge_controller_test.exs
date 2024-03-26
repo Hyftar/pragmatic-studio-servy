@@ -1,4 +1,4 @@
-defmodule HttpServerTest do
+defmodule PledgeControllerTest do
   use ExUnit.Case
 
   alias Servy.HttpServer
@@ -8,6 +8,7 @@ defmodule HttpServerTest do
 
     on_exit(fn ->
       Servy.PledgeServer.kill()
+      Servy.FourOhFourCounter.kill()
       Process.exit(pid, :kill)
     end)
 

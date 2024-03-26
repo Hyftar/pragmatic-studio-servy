@@ -1,4 +1,4 @@
-defmodule HttpServerTest do
+defmodule FourOhFourServerTest do
   use ExUnit.Case
 
   alias Servy.HttpServer
