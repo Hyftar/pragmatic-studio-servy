@@ -21,17 +21,22 @@ defmodule Servy.Handler do
   end
 
   def route(%Conv{ method: "GET", path: "/wildthings" } = conv) do
-      %Conv{ conv | status: 200, resp_body: "Bears, Lions, Tigers" }
+    %Conv{ conv | status: 200, resp_body: "Bears, Lions, Tigers" }
   end
 
   def route(%Conv{ method: "GET", path: "/bears" } = conv) do
-      conv
-      |> BearController.index
+    conv
+    |> BearController.index
   end
 
   def route(%Conv{ method: "GET", path: "/api/bears" } = conv) do
-      conv
-      |> Servy.Api.BearController.index
+    conv
+    |> Servy.Api.BearController.index
+  end
+
+  def route(%Conv{ method: "GET", path: "/api/weather" } = conv) do
+    conv
+    |> Servy.Api.WeatherController.index
   end
 
   def route(%Conv{ method: "GET", path: "/bears/new" } = conv) do
