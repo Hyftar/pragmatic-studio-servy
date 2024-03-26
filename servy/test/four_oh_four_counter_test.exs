@@ -9,6 +9,7 @@ defmodule FourOhFourServerTest do
     on_exit(fn ->
       Servy.PledgeServer.kill()
       Servy.FourOhFourCounter.kill()
+      Servy.WeatherServer.kill()
       Process.exit(pid, :kill)
     end)
 

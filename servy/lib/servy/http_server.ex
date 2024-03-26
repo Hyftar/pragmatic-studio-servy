@@ -20,6 +20,7 @@ defmodule Servy.HttpServer do
 
     Servy.PledgeServer.start()
     Servy.FourOhFourCounter.start()
+    Servy.WeatherServer.start()
 
     accept_loop(listen_socket)
   end

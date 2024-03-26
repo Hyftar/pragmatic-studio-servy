@@ -1,16 +1,14 @@
 defmodule Servy.Weather do
-  def get_weather(location) do
+  def get_weather() do
     :timer.sleep(:rand.uniform(500) + 500)
 
-    locations = %{
-      "Miami" => %{ temperature: 30, conditions: "sunny" },
-      "Montreal" => %{ temperature: 8, conditions: "rainy" },
-      "Quebec" => %{ temperature: 5, conditions: "sunny" },
-      "Boston" => %{ temperature: 12, conditions: "rainy" },
-      "Shawinigan" => %{ temperature: 3, conditions: "scattered clouds" },
-      "New York" => %{ temperature: 11, conditions: "cloudy" },
+    %{
+      "Miami" => %{ temperature: :rand.uniform(10) + 20, conditions: "sunny" },
+      "Montreal" => %{ temperature: :rand.uniform(10), conditions: "rainy" },
+      "Quebec" => %{ temperature: :rand.uniform(10), conditions: "chilly" },
+      "Boston" => %{ temperature: :rand.uniform(10) + 5, conditions: "rainy" },
+      "Shawinigan" => %{ temperature: :rand.uniform(10), conditions: "scattered clouds" },
+      "New York" => %{ temperature: :rand.uniform(10) + 5, conditions: "cloudy" },
     }
-
-    Map.get(locations, location)
   end
 end
