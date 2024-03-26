@@ -3,9 +3,12 @@ defmodule HttpServerTest do
 
   alias Servy.HttpServer
 
-  test "accepts a request on a socket and sends back a response" do
+  setup_all do
     spawn(HttpServer, :start, [4000])
+    :ok
+  end
 
+  test "accepts a request on a socket and sends back a response" do
     {:ok, response} = HTTPoison.get "http://localhost:4000/wildthings"
 
     assert response.status_code == 200
@@ -13,8 +16,6 @@ defmodule HttpServerTest do
   end
 
   test "sends multiple requests concurrently and handles all responses" do
-    spawn(HttpServer, :start, [4000])
-
     base_url = "http://localhost:4000/"
 
     urls = [

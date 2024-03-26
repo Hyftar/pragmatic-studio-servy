@@ -66,6 +66,14 @@ defmodule Servy.Handler do
     |> handle_file(conv)
   end
 
+  def route(%Conv{method: "POST", path: "/pledges", params: %{"name" => _, "amount" => _}} = conv) do
+    Servy.PledgeController.create(conv, conv.params)
+  end
+
+  def route(%Conv{method: "GET", path: "/pledges"} = conv) do
+    Servy.PledgeController.index(conv)
+  end
+
   def route(%Conv{ method: method, path: path } = conv) do
     %Conv{ conv | status: 404, resp_body: "No #{path} path with method #{method} found!"}
   end
